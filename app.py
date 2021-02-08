@@ -1,9 +1,16 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 import pandas as pd
 from sqlalchemy import create_engine
 import os
 
 app = Flask(__name__)
+
+
+def get_data():
+    connection_string = "postgres://postgres:postgres@localhost/vaccines"
+    with create_engine(connection_string) as conn:
+        data = pd.read_sql("select * from countries",conn)
+    return data
 
 @app.route("/")
 def index():
@@ -11,11 +18,7 @@ def index():
 
 @app.route("/api_country")
 def api_country():
-    connection_string = "postgres://postgres:postgres@localhost/vaccines"
-
-    conn = create_engine(connection_string)
-    data = pd.read_sql("select * from countries",conn)
-
+    data = get_data()
     country = data.groupby("country")["daily_vaccinations"].sum()
 
     return (
@@ -29,10 +32,7 @@ def api_country():
 
 @app.route("/api_world")
 def api_vaccines():
-    connection_string = "postgres://postgres:postgres@localhost/vaccines"
-
-    conn = create_engine(connection_string)
-    data = pd.read_sql("select * from countries",conn)
+    data = get_data()
 
     total_world = data.groupby("date")["daily_vaccinations"].sum()
 
@@ -44,19 +44,21 @@ def api_vaccines():
         .to_json(orient="records")
     )
 
-@app.route("/api_dailycountry")
-def api_daily():
-    connection_string = "postgres://postgres:postgres@localhost/vaccines"
-
-    conn = create_engine(connection_string)
-    data = pd.read_sql("select * from countries",conn)
-
-    daily_country=data[['country','date',"daily_vaccinations"]].groupby(['country']).agg(list)
+@app.route("/api/<country>/daily")
+def api_daily(country):
+    data = get_data()
+    dt = data.query(f'country == "{country}"')
+    daily_country=dt[['country','date',"daily_vaccinations"]].groupby(['country']).agg(list)
 
     return (
         daily_country
         .to_json(orient="index")
     )
+
+@app.route("/api/countries")
+def countries():
+    data = get_data()
+    return jsonify(data.country.unique().tolist())
 
 
 if __name__=="__main__":

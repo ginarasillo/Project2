@@ -28,7 +28,22 @@ d3.json("/api_world").then(data=>{
 
 })
 
-d3.json("/api_dailycountry").then(data=>{
+
+function init(){
+  selector = d3.select("#selcountry")
+
+  d3.json("/api/countries").then(data=>{
+    data.forEach((country)=>{
+      selector
+        .append("option")
+        .text(country)
+        .property("value", country);
+    })
+  })
+}
+
+function countryChanged(country){
+  d3.json("/api/country/"+country+"/daily").then(data=>{
 
     let dailycountry_data = [
         {
@@ -40,4 +55,9 @@ d3.json("/api_dailycountry").then(data=>{
       
     Plotly.newPlot('dailycountry', dailycountry_data);
 
-})
+  })
+}
+
+
+
+init();
