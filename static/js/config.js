@@ -45,8 +45,27 @@ function init(){
   })
 }
 
+function countryChanged(country){
+  d3.json("/api/country/"+country).then(data=>{
+    let values = Object.values(data)
+    let dates = values[0].date
+    let dailyvaccinations =values[0].daily_vaccinations
 
-// function buildCharts(country){
+        let dailycountry_data = [
+          {
+            x: dates,
+            y: dailyvaccinations,
+            type: 'scatter',
+            mode: 'lines+markers'
+          }
+        ]
+        Plotly.newPlot('dailycountry', dailycountry_data);
+  }); //End d3.json
+} //End countryChanged
+
+
+
+// function countryChanged2(country){
 //   d3.json("/api/country/"+country).then(data=>{
 //     console.log(data)
 
@@ -58,12 +77,12 @@ function init(){
 //           type: 'scatter',
 //           mode: 'lines+markers'
 //         }
-//       ];
+//   });
       
 //     Plotly.newPlot('dailycountry', dailycountry_data);
 
-//   })
 // }
+
 
 
 

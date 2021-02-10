@@ -1,5 +1,7 @@
 Project2/*
 data/country_vaccinations.csv
+data/Population.csv
+
 .DS_Store
 # Byte-compiled / optimized / DLL files
 __pycache__/
