@@ -1,4 +1,4 @@
-console.log("Hola javascript")
+console.log("Hola")
 
 d3.json("/api_country").then(data=>{
 
@@ -15,19 +15,22 @@ d3.json("/api_country").then(data=>{
 })
 
 d3.json("/api_world").then(data=>{
+data.shift()
 
-    let world_data = {
+    let world_data = [
+      {
           x: data.map(d=>d.date),
           y: data.map(d=>d.daily_vaccinations),
-          type: 'scatter'
-        };
+          type: 'scatter',
+          mode: 'lines+markers'
+          }
+        ];
 
-    let data=[world_data];
+
       
-    Plotly.newPlot('world', data);
+    Plotly.newPlot('world', world_data);
 
 })
-
 
 function init(){
   selector = d3.select("#selcountry")
@@ -42,22 +45,49 @@ function init(){
   })
 }
 
-function countryChanged(country){
-  d3.json("/api/country/"+country+"/daily").then(data=>{
 
-    let dailycountry_data = [
-        {
-          x: data.map(d=>d.date),
-          y: data.map(d=>d.daily_vaccinations),
-          type: 'scatter'
-        }
-      ];
+// function buildCharts(country){
+//   d3.json("/api/country/"+country).then(data=>{
+//     console.log(data)
+
+//     let country = data.country
+//     filtred_data=data.country.filter(s=>s.country==sample)
+//         {
+//           x: data.map(d=>d.date),
+//           y: data.map(d=>d.daily_vaccinations),
+//           type: 'scatter',
+//           mode: 'lines+markers'
+//         }
+//       ];
       
-    Plotly.newPlot('dailycountry', dailycountry_data);
+//     Plotly.newPlot('dailycountry', dailycountry_data);
 
-  })
-}
+//   })
+// }
 
 
 
 init();
+
+
+// function buildCharts(sample){
+//   d3.json("samples.json").then((data)=>{
+//       console.log("hello")
+//       let samples=data.samples
+//       filtred_data=samples.filter(s=>s.id==sample)
+//       let results=filtred_data[0]
+//       let otu_ids= results.otu_ids
+//       let otu_values= results.sample_values
+//       let otu_labels=results.otu_labels
+
+//       let bar_d=[
+//           {
+//               y:otu_ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse(),
+//               x: otu_values.slice(0,10).reverse(),
+//               text: otu_labels.slice(0,10).reverse(),
+//               type:"bar",
+//               orientation:"h"
+//           }
+//       ];
+
+//       Plotly.newPlot("bar", bar_d);

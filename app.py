@@ -5,12 +5,13 @@ import os
 
 app = Flask(__name__)
 
-
 def get_data():
     connection_string = "postgres://postgres:postgres@localhost/vaccines"
-    with create_engine(connection_string) as conn:
-        data = pd.read_sql("select * from countries",conn)
+    # with create_engine(connection_string) as conn:
+    conn=create_engine(connection_string)
+    data = pd.read_sql("select * from countries",conn)
     return data
+
 
 @app.route("/")
 def index():
@@ -18,7 +19,11 @@ def index():
 
 @app.route("/api_country")
 def api_country():
-    data = get_data()
+    
+    connection_string = "postgres://postgres:postgres@localhost/vaccines"
+    conn = create_engine(connection_string)
+    data = pd.read_sql("select * from countries",conn)
+
     country = data.groupby("country")["daily_vaccinations"].sum()
 
     return (
@@ -32,7 +37,9 @@ def api_country():
 
 @app.route("/api_world")
 def api_vaccines():
-    data = get_data()
+    connection_string = "postgres://postgres:postgres@localhost/vaccines"
+    conn = create_engine(connection_string)
+    data = pd.read_sql("select * from countries",conn)
 
     total_world = data.groupby("date")["daily_vaccinations"].sum()
 
@@ -40,17 +47,20 @@ def api_vaccines():
         total_world
         .reset_index()
         .loc[:,["date","daily_vaccinations"]]
-        .sort_values(by="daily_vaccinations", ascending=False)
+        .sort_values(by="date", ascending=False)
         .to_json(orient="records")
     )
 
-@app.route("/api/<country>/daily")
+@app.route("/api/country/<country>")
 def api_daily(country):
-    data = get_data()
+    connection_string = "postgres://postgres:postgres@localhost/vaccines"
+    conn = create_engine(connection_string)
+    data = pd.read_sql("select * from countries",conn)
     dt = data.query(f'country == "{country}"')
     daily_country=dt[['country','date',"daily_vaccinations"]].groupby(['country']).agg(list)
+    
 
-    return (
+    return(
         daily_country
         .to_json(orient="index")
     )
