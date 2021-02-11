@@ -6,7 +6,8 @@ import os
 app = Flask(__name__)
 
 def get_data():
-    connection_string = "postgres://postgres:12@localhost/vaccines"
+    connection_string=os.environ.get("DATABASE_URL", "")
+    #connection_string = "postgres://postgres:12@localhost/vaccines"
     # with create_engine(connection_string) as conn:
     conn=create_engine(connection_string)
     data = pd.read_sql("select * from countries",conn)
@@ -19,8 +20,8 @@ def index():
 
 @app.route("/api_country")
 def api_country():
-    
-    connection_string = "postgres://postgres:12@localhost/vaccines"
+    connection_string=os.environ.get("DATABASE_URL", "")
+    #connection_string = "postgres://postgres:12@localhost/vaccines"
     conn = create_engine(connection_string)
     data = pd.read_sql("select * from countries",conn)
 
@@ -37,7 +38,8 @@ def api_country():
 
 @app.route("/api_world")
 def api_vaccines():
-    connection_string = "postgres://postgres:12@localhost/vaccines"
+    connection_string=os.environ.get("DATABASE_URL", "")
+    #connection_string = "postgres://postgres:12@localhost/vaccines"
     conn = create_engine(connection_string)
     data = pd.read_sql("select * from countries",conn)
 
@@ -53,7 +55,8 @@ def api_vaccines():
 
 @app.route("/api/country/<country>")
 def api_daily(country):
-    connection_string = "postgres://postgres:12@localhost/vaccines"
+    connection_string=os.environ.get("DATABASE_URL", "")
+    #connection_string = "postgres://postgres:12@localhost/vaccines"
     conn = create_engine(connection_string)
     data = pd.read_sql("select * from countries",conn)
     dt = data.query(f'country == "{country}"')
