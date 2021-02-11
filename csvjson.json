@@ -1,0 +1,77 @@
+[
+  {
+    "Country": "United States",
+    "Total Vaccines": 26376556,
+    "Coordinates": "39.05850894680779, -100.83857300500551"
+  },
+  {
+    "Country": "China",
+    "Total Vaccines": 21794325,
+    "Coordinates": "34.843031552749764, 104.46911944764778"
+  },
+  {
+    "Country": "United Kingdom",
+    "Total Vaccines": 7956920,
+    "Coordinates": "55.15779684384377, -3.9458418417062986"
+  },
+  {
+    "Country": "England",
+    "Total Vaccines": 6936235,
+    "Coordinates": "52.459936116767445, -1.4319881945645279"
+  },
+  {
+    "Country": "Israel",
+    "Total Vaccines": 4535713,
+    "Coordinates": "30.97313769519281, 34.8368926898055"
+  },
+  {
+    "Country": "India",
+    "Total Vaccines": 3379485,
+    "Coordinates": "23.19433426201882, 79.87058599842464"
+  },
+  {
+    "Country": "Turkey",
+    "Total Vaccines": 2540614,
+    "Coordinates": "38.87746795676927, 35.53388078708091"
+  },
+  {
+    "Country": "United Arab Emirates",
+    "Total Vaccines": 2317170,
+    "Coordinates": "23.886246113500352, 54.215993598606"
+  },
+  {
+    "Country": "Germany",
+    "Total Vaccines": 2296069,
+    "Coordinates": "51.06223461336438, 10.470344432967055"
+  },
+  {
+    "Country": "Italy",
+    "Total Vaccines": 1808746,
+    "Coordinates": "43.09391421465869, 12.458575552319878"
+  },
+  {
+    "Country": "Brazil",
+    "Total Vaccines": 1633573,
+    "Coordinates": "-8.352310049356104, -56.10787961832641"
+  },
+  {
+    "Country": "Spain",
+    "Total Vaccines": 1366039,
+    "Coordinates": "39.45290607085971, -2.9146332810365574"
+  },
+  {
+    "Country": "France",
+    "Total Vaccines": 1261221,
+    "Coordinates": "46.444164944788845, 2.865512176846255"
+  },
+  {
+    "Country": "Poland",
+    "Total Vaccines": 1069106,
+    "Coordinates": "53.00684124840536, 18.777393727656225"
+  },
+  {
+    "Country": "Russia",
+    "Total Vaccines": 927026,
+    "Coordinates": "62.190770324392986, 94.08659778551193"
+  }
+]

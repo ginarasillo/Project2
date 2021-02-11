@@ -71,5 +71,21 @@ def countries():
     return jsonify(data.country.unique().tolist())
 
 
+@app.route("/Graphic1")
+def Graphic1():
+    return render_template("Graphic1.html")
+
+@app.route("/Graphic2")
+def Graphic2():
+    return render_template("Graphic2.html")
+
+@app.route("/Graphic3")
+def Graphic3():
+    return render_template("Graphic3.html")
+
+@app.route("/Readmore")
+def Readmore():
+    return render_template("Readmore.html")
+
 if __name__=="__main__":
     app.run(debug=True)
