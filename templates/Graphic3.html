@@ -75,7 +75,7 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Daily Worldwide Vaccination per country</h2>
+          <h2>Daily Worldwide Vaccination</h2>
         
         </div>
 
@@ -83,19 +83,17 @@
     </section>
 
     <!-- ======= Team Section ======= -->
-    <div class="col-12">
-      <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Daily Worldwide Vaccination per country</h5>
-            <div class="well">
-              <h5>Select country</h5>
-              <select id="selcountry" onchange="countryChanged(this.value)"></select>
-            </div>
-            <div id="dailycountry"></div>
-          </div>
-        </div>
-  </div>
-
+    <div class="row" data-aos="fade-up">
+      <div class="col-12 mt-2">
+        <div class="container">
+          <div class="row">
+              <div class="col-12">
+                  <div class="card">
+                      <div class="card-body">
+                        <div id="world"></div>
+                      </div>
+                    </div>
+              </div> 
 
   <!-- ======= Footer ======= -->
   <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
@@ -118,7 +116,6 @@
   <!-- Template Main JS File -->
   <script src="../static/assets/js/main.js"></script>
   <script src="../static/js/config.js"></script>
-
 </body>
 
 </html>
